@@ -3,11 +3,11 @@ version: "3.7"
 services:
   api:
     build:
-      context: ../api
-      dockerfile: ../docker/Dockerfile
+      context: .
+      dockerfile: dockerfiles/rails/Dockerfile
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - ../api:/app
+      - ./back/api:/app
     ports:
       - 8000:3000
     environment:
