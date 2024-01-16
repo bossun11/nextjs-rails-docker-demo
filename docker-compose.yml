@@ -1,6 +1,24 @@
 version: "3.7"
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfiles/nextjs/Dockerfile
+    image: next-app
+    container_name: next-app
+    ports:
+      - 3000:3000
+    volumes:
+      - ./front:/app
+      - ./front/node_modules:/app/node_modules
+    command: sh -c "npm run dev"
+    environment:
+      TZ: Asia/Tokyo
+    restart: always
+    tty: true
+    stdin_open: true
+
   api:
     build:
       context: .
@@ -33,3 +51,4 @@ services:
 
 volumes:
   postgres-data:
+  node_modules:
